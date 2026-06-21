@@ -4,21 +4,75 @@ function lerp(a, b, t) {
 
 function bounds(value, array) {
 
-    if (value <= array[0]) {
+    /*
+    ---------------------------------------
+    Extrapolation below minimum
+    ---------------------------------------
+    */
+
+    if (value < array[0]) {
+
         return {
+
             low: array[0],
-            high: array[0],
-            ratio: 0
+
+            high: array[1],
+
+            ratio:
+
+                (value - array[0]) /
+
+                (array[1] - array[0])
+
         };
+
     }
 
-    if (value >= array[array.length - 1]) {
+    /*
+    ---------------------------------------
+    Exact minimum
+    ---------------------------------------
+    */
+
+    if (value === array[0]) {
+
         return {
-            low: array[array.length - 1],
-            high: array[array.length - 1],
+
+            low: array[0],
+
+            high: array[0],
+
             ratio: 0
+
         };
+
     }
+
+    /*
+    ---------------------------------------
+    Above maximum
+    ---------------------------------------
+    */
+
+    if (value >= array[array.length - 1]) {
+
+        return {
+
+            low: array[array.length - 1],
+
+            high: array[array.length - 1],
+
+            ratio: 0
+
+        };
+
+    }
+
+    /*
+    ---------------------------------------
+    Normal interpolation
+    ---------------------------------------
+    */
 
     for (let i = 0; i < array.length - 1; i++) {
 
