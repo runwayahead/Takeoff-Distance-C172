@@ -75,11 +75,17 @@ function calculateDensityAltitude(
 
         );
 
-    return round(
+    return Math.max(
 
-        pressureAltitude +
+        0,
 
-        (120 * (Number(oat) - isaTemp))
+        round(
+
+            pressureAltitude +
+
+            (120 * (Number(oat) - isaTemp))
+
+        )
 
     );
 
@@ -227,11 +233,7 @@ window.addEventListener(
 
                         if (
 
-                            typeof updatePerformance
-
-                            ===
-
-                            "function"
+                            typeof updatePerformance === "function"
 
                         ) {
 
