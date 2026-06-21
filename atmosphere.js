@@ -22,11 +22,17 @@ PA = Elevation + (1013 - QNH) * 30
 
 function calculatePressureAltitude(elevation, qnh) {
 
-    return round(
+    return Math.max(
 
-        Number(elevation) +
+        0,
 
-        ((1013 - Number(qnh)) * 30)
+        round(
+
+            Number(elevation) +
+
+            ((1013 - Number(qnh)) * 30)
+
+        )
 
     );
 
@@ -125,22 +131,19 @@ function updateAtmosphere() {
 
     const pressureAltitude =
 
-        calculatePressureAltitude(
+        Math.max(
 
-            elevation,
+            0,
 
-            qnh
+            calculatePressureAltitude(
+
+                elevation,
+
+                qnh
+
+            )
 
         );
-
-    /*
-    -----------------------------------------
-    Density Altitude
-
-    niemals kleiner 0 ft
-
-    -----------------------------------------
-    */
 
     const densityAltitude =
 
